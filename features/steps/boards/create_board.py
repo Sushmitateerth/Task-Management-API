@@ -24,7 +24,7 @@ def step_impl(context, is_created):
     verifies the created board
     """
     context.json = context.response.json()
-    log_response(context.response, 'board creation "succeeds"')
+    log_response(context.response, context)
 
     if is_created == "succeeds":
         assert context.response.status_code == HTTPStatus.CREATED

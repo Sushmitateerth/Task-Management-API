@@ -5,7 +5,7 @@ Feature: authentication
     Then user creation "succeeds"
     And user can signin
 
-# negative case scenarioes
+# negative case scenarios
   Scenario: create duplicate user
     Given we create user with duplicate credentials
     Then user creation "fails"

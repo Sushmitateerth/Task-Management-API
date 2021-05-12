@@ -2,6 +2,7 @@ import jwt
 import requests
 
 from constants import base_url
+from util.db import clear_db
 from http import HTTPStatus
 
 
@@ -36,3 +37,11 @@ def before_tag(context, tag):
     context.headers = {"Authorization": f"Bearer {token}"}
     jwt_payload = jwt.decode(token, options={'verify_signature': False})
     context.user_id = jwt_payload['id']
+
+
+def after_all(context):
+    clear_db()
+
+
+def before_scenario(context, scenario):
+    clear_db(clear_user=False)

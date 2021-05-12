@@ -13,7 +13,7 @@ limit = 3
 def step_impl(context):
     context.search_response = requests.get(f"{context.base_url}/boards/?skip={skip}&limit={limit}",
                                            headers=context.headers)
-    log_response(context.search_response)
+    log_response(context.search_response, context)
     context.json_response = context.search_response.json()
 
 

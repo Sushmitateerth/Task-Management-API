@@ -25,7 +25,7 @@ def step_impl(context, is_created):
     verifies success and failure cases defined as two different scenarios in auth.feature
     """
     json = context.response.json()
-    log_response(context.response, "user is created")
+    log_response(context.response, context)
 
     if is_created == "succeeds":
         assert context.response.status_code == HTTPStatus.CREATED
@@ -48,7 +48,7 @@ def step_impl(context):
     """
     response = requests.post(f"{context.base_url}/auth/signin", json=context.user)
     json = response.json()
-    log_response(response, "user can signin")
+    log_response(response, context)
 
     assert response.status_code == HTTPStatus.OK
 

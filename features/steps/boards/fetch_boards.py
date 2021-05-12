@@ -1,13 +1,16 @@
+import logging
 
 import requests
 from behave import *
 from features.steps.boards.data import params
 from http import HTTPStatus
 
+from util.logger import log_response
 
 @given('a set of boards')
 def step_impl(context):
     context.list = []
+    logging.info("...........creating boards........")
     for board in params.boards:
         response = requests.post(f"{context.base_url}/boards", json=board, headers=context.headers)
         json = response.json()
@@ -17,7 +20,7 @@ def step_impl(context):
 @when('we fetch boards list')
 def step_impl(context):
     context.response = requests.get(f"{context.base_url}/boards", headers=context.headers)
-
+    log_response(context.response, context)
 
 @then('boards are returned')
 def step_impl(context):

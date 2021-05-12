@@ -17,7 +17,7 @@ def step_impl(context):
     ]
     context.sort_response = requests.get(f"{context.base_url}/boards/?sort={json.dumps(sort_input)}",
                                          headers=context.headers)
-    log_response(context.sort_response)
+    log_response(context.sort_response, context)
     context.actual_result = context.sort_response.json()
 
 

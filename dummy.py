@@ -1,11 +1,15 @@
-import json
+import os
+import psycopg2
 
-api_filter = {
-        "createdAt": {
-            "gt": "asdf"
-        }
-    }
+from dotenv import load_dotenv
 
+load_dotenv()
 
-print(f"filter={api_filter}")
-print(f"filter={json.dumps(api_filter)}")
+with psycopg2.connect(dbname=os.getenv("DBNAME"),
+                      user=os.getenv("USER"),
+                      password=os.getenv("PASSWORD"),
+                      host=os.getenv("HOST"),
+                      port=os.getenv("PORT")) as conn:
+    with conn.cursor() as cur:
+        cur.execute('SELECT * FROM public."User"')
+        print(cur.fetchone())

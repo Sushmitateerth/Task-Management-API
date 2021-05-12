@@ -43,4 +43,3 @@ boards = [
 
 # sort boards by description
 sort_by_description = sorted(boards, key=lambda board: board['description'])
-print(sort_by_description)
